@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-4xl font-bold mb-10 text-center">Últimos artigos</h1>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in posts %}
+                <a href="{% url 'blog:post_detail' post.slug %}" class="group block bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-xl transition">
+                    {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-full h-48 object-cover rounded-t-xl">
+                    {% endif %}
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2 group-hover:text-indigo-600">{{ post.title }}</h2>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            {{ post.published_at|date:"d/m/Y" }} • {{ post.category.name }}
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 line-clamp-3">
+                            {{ post.content|striptags|truncatewords:40 }}
+                        </p>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="col-span-full text-center text-gray-700 dark:text-gray-300">Nenhum post encontrado.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Paginação simples -->
+        {% if is_paginated %}
+            <div class="mt-12 flex justify-center gap-4">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-indigo-600 text-white rounded">Anterior</a>
+                {% endif %}
+                <span class="px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded">
+                    Página {{ page_obj.number }} de {{ paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-indigo-600 text-white rounded">Próxima</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
