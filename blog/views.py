@@ -93,6 +93,6 @@ class PortfolioView(TemplateView):
         context = super().get_context_data(**kwargs)
         # Você pode puxar repositórios via Github API ou deixar estático
         context['projects'] = [
-            {'name': 'Blog Pessoal', 'url': 'https://github.com/seuuser/blog-pessoal', 'desc': 'Este blog feito em Django + Tailwind'}
+            {'name': 'Blog Pessoal', 'url': 'https://github.com/Flaviohmm/blog-pessoal', 'desc': 'Este blog feito em Django + Tailwind'}
         ]
         return context

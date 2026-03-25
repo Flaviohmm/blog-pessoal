@@ -535,6 +535,10 @@
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+  .shadow-xl {
+    --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
@@ -580,6 +584,14 @@
       }
     }
   }
+  .hover\:shadow-2xl {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
   .hover\:shadow-xl {
     &:hover {
       @media (hover: hover) {
@@ -598,6 +610,11 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+  .dark\:bg-blue-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-blue-800, oklch(42.4% 0.199 265.638));
+    }
+  }
   .dark\:bg-gray-700 {
     &:where(.dark, .dark *) {
       background-color: var(--color-gray-700, oklch(37.3% 0.034 259.733));
@@ -613,9 +630,19 @@
       background-color: var(--color-indigo-700, oklch(45.7% 0.24 277.023));
     }
   }
+  .dark\:bg-indigo-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-indigo-800, oklch(39.8% 0.195 277.366));
+    }
+  }
   .dark\:bg-indigo-950 {
     &:where(.dark, .dark *) {
       background-color: var(--color-indigo-950, oklch(25.7% 0.09 281.288));
+    }
+  }
+  .dark\:bg-purple-900 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-purple-900, oklch(38.1% 0.176 304.987));
     }
   }
   .dark\:from-blue-800 {
@@ -682,6 +709,15 @@
   .dark\:text-indigo-400 {
     &:where(.dark, .dark *) {
       color: var(--color-indigo-400, oklch(67.3% 0.182 276.935));
+    }
+  }
+  .dark\:group-hover\:text-indigo-400 {
+    &:where(.dark, .dark *) {
+      &:is(:where(.group):hover *) {
+        @media (hover: hover) {
+          color: var(--color-indigo-400, oklch(67.3% 0.182 276.935));
+        }
+      }
     }
   }
   .dark\:hover\:bg-indigo-900 {

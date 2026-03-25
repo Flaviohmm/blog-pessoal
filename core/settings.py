@@ -131,30 +131,49 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# CKEditor 5 configuration
-CKEDITOR5_CONFIGS = {
+# ===================== CKEditor 5 =====================
+CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': [
             'heading', '|',
             'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote',
             '|',
-            'code', 'codeBlock',
+            'code', 'codeBlock', 'CodeSnippet',
             '|',
-            'imageUpload', 'insertImage', 'mediaEmbed',
+            'imageUpload', 'insertImage',
             '|',
             'undo', 'redo',
             '|',
             'sourceEditing',
         ],
-        'height': 500,
+        'height': 650,
         'language': 'pt-br',
-        # Se quiser Markdown output (requer build customizado do CKEditor5)
-        # 'plugins': ['MarkdownGfm'],
-        # Mas por padrão salva HTML
+
+        # 🔥 ESSENCIAL
+        'codeBlock': {
+            'languages': [
+                {'language': 'plaintext', 'label': 'Texto'},
+                {'language': 'python', 'label': 'Python'},
+                {'language': 'javascript', 'label': 'JavaScript'},
+                {'language': 'html', 'label': 'HTML'},
+                {'language': 'css', 'label': 'CSS'},
+                {'language': 'bash', 'label': 'Bash'},
+                {'language': 'json', 'label': 'JSON'},
+            ]
+        },
+        
+        'htmlSupport': {
+            'allow': [
+                {'name': '/.*/', 'attributes': True, 'classes': True, 'styles': True}
+            ]
+        },
     },
-    # Você pode criar configs diferentes para tutoriais, etc.
+    # Configuração mais leve para outros usos
     'minimal': {
-        'toolbar': ['bold', 'italic', 'link', 'bulletedList', 'numberedList'],
+        'toolbar': [
+            'bold', 'italic', 'link', 'bulletedList', 'numberedList'
+        ],
+        'height': 400,
     }
 }
 

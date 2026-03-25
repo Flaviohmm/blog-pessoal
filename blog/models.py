@@ -1,5 +1,9 @@
+from typing import Iterable
+
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
+from django.utils.text import slugify
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -7,6 +11,15 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=40, unique=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -37,4 +50,12 @@ class Post(models.Model):
                 'markdown.extensions.toc',
                 'markdown.extensions.sane_lists',
             ],
+            extension_configs={
+                'markdown.extensions.codehilite': {
+                    'linenums': False,          # linhas numeradas (opcional)
+                    'guess_lang': True,         # tenta detectar linguagem
+                    'use_pygments': True,       # usa Pygments (ESSENCIAL)
+                    'pygments_style': 'dracula' # 🎨 tema de cores
+                }
+            }
         )
